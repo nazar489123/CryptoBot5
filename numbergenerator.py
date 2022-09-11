@@ -1,13 +1,9 @@
-
-from urllib import request
 import requests
 import time
 from bs4 import BeautifulSoup
-import os
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 import random
-
 browser = webdriver.Chrome(ChromeDriverManager().install())
 y=1
 maxPages=2573157538607026564968244111304175730063056983979442319613448069811514699875
@@ -22,12 +18,15 @@ while(True):
         window_before = browser.window_handles[0]
         url = urladdr+str(y)
         reqs = browser.get(url)
-        time.sleep(0.5)
+        time.sleep(1)
         soup = BeautifulSoup(browser.page_source, 'html.parser')
         items = soup.find_all('span')
         profit = items[3].text
+        transactions = items[4].text
         if profit!=' 0':
-                requests.get(boturl+"Найдены деньги на странице"+str(y))
+                requests.get(boturl+"Найдены деньги: "+"("+profit+"),"+" на странице "+str(url))
+        if transactions!=' 0':
+                requests.get(boturl+"Найдены деньги: "+"("+profit+"),"+" на странице "+str(url))
         print("Проверено адресов: "+str(calc))
         y=random.randint(0,maxPages)
 
