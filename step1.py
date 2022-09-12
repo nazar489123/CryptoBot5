@@ -1,19 +1,15 @@
-import time
-import sys
+
 import bit
-from bit import Key
 
-from bit.crypto import ECPrivateKey, ripemd160_sha256
-
-profit='C:\\bitgen\\out2.txt'
-y=22416810028847082123
-def func(y):
-        k = bit.PrivateKey.from_int(y)
-        prvkey = ECPrivateKey.from_int(y)
-        hexprvkey = k.to_hex()
+y = 22416810028847082123
+last = 194087394801004738104
+profit='out3.txt'
+def func(y2):
+        k = bit.PrivateKey.from_int(y2)
         with open(profit,'a') as out:
-                out.write('{},{}\n'.format(y, k.address))
-
-while True:
-        func(y)
+               out.write('{}\n'.format(k.address))
+while y<last:
         y +=1
+        func(y)
+
+
