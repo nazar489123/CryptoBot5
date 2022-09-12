@@ -18,17 +18,19 @@ while(True):
         window_before = browser.window_handles[0]
         url = urladdr+str(y)
         reqs = browser.get(url)
-        time.sleep(1)
+        time.sleep(0)
         soup = BeautifulSoup(browser.page_source, 'html.parser')
         items = soup.find_all('span')
         profit = items[3].text
         transactions = items[4].text
-        if profit!=' 0':
+        if profit == '\n\n\n\n\n\n\n\n\n\n\n':
+                continue
+        if profit != ' 0':
                 requests.get(boturl+"Найдены деньги: "+"("+profit+"),"+" на странице "+str(url))
-        if transactions!=' 0':
-                requests.get(boturl+"Найдены деньги: "+"("+profit+"),"+" на странице "+str(url))
+        if transactions != ' 0':
+                requests.get(boturl+"Найдены транзакции: "+"("+transactions+"),"+" на странице "+str(url))
         print("Проверено адресов: "+str(calc))
-        y=random.randint(0,maxPages)
+        y=random.randint(0, maxPages)
 
                   
 
